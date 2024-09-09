@@ -1,6 +1,6 @@
 import { Rescrd_Url } from "../utils/constants";
 const Itemlist = ({ items }) => {
-  console.log(items);
+ 
   return (
     <div>
       {items.map((item) => (
