@@ -1,13 +1,12 @@
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import useNewReslist from "../utils/useNewReslist";
 import useOnlinetstatus from "../utils/useOnlinestatus";
-
+import UserContext from "../utils/UserContext";
 const Body = () => {
   const newreslist = useNewReslist();
-  
 
   const [filteredrestraunt, setfilteredrestraunt] = useState([]);
 
@@ -27,8 +26,11 @@ const Body = () => {
         and try again..
       </h1>
     );
+    const {loggedInuser,setUserName}=  useContext(UserContext);
 
-  return newreslist.length === 0?<Shimmer />:(
+  return newreslist.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter flex ">
         <div className=" m-4 p-4  ">
@@ -64,6 +66,13 @@ const Body = () => {
           >
             Top Rated Restaurant
           </button>
+          </div>
+          <div className=" p-4 flex items-center " >
+          <label >UserName: </label>
+          <input className="border border-black p-2"
+          value={loggedInuser}
+          onChange={(e)=>setUserName(e.target.value)}
+          />
         </div>
       </div>
 

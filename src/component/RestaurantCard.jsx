@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { Rescrd_Url } from "../utils/constants";
+import UserContext from "../utils/UserContext";
+
 
 const RestaurantCard = (prop) => {
   const { resData } = prop;
+  const {loggedInuser}=useContext(UserContext)
   {
     const { cloudinaryImageId, name, cuisines, costForTwo, avgRating } =
       resData?.info;
@@ -23,8 +27,10 @@ const RestaurantCard = (prop) => {
           <p>{deliveryTime}mins </p>
           <p>•</p>
           <h5>{costForTwo}</h5>
+          
         </div>
         <p className="line-clamp-1">{cuisines.join(", ")}</p>
+          <h5>{loggedInuser}</h5>
       </div>
     );
   }
