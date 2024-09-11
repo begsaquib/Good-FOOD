@@ -9,6 +9,19 @@ const Body = () => {
   const newreslist = useNewReslist();
 
   const [filteredrestraunt, setfilteredrestraunt] = useState([]);
+  const handleSearch = () => {
+    const filteredres = newreslist.filter(
+      (res) =>
+        res.info.name
+          .toLowerCase()
+          .includes(Searchtext.current.value.trim().toLowerCase()) ||
+        res.info.cuisines
+          .join(",")
+          .toLowerCase()
+          .includes(Searchtext.current.value.trim().toLowerCase())
+    );
+    setfilteredrestraunt(filteredres);
+  };
 
   useEffect(() => {
     if (newreslist.length) {
@@ -26,7 +39,7 @@ const Body = () => {
         and try again..
       </h1>
     );
-    const {loggedInuser,setUserName}=  useContext(UserContext);
+  const { loggedInuser, setUserName } = useContext(UserContext);
 
   return newreslist.length === 0 ? (
     <Shimmer />
@@ -37,19 +50,17 @@ const Body = () => {
           <input
             ref={Searchtext}
             type="text"
-            className="border border-solid border-black"
+            className="border border-solid border-black p-2"
+            // Detect Enter key press 
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
           />
           <button
             className="bg-slate-300 rounded-md px-4 py-2 ml-2 hover:bg-slate-500"
-            onClick={() => {
-              const filteredres = newreslist.filter((res) =>
-                res.info.name
-                  .toLowerCase()
-                  .includes(Searchtext.current.value.toLowerCase())
-              );
-
-              setfilteredrestraunt(filteredres);
-            }}
+            onClick={handleSearch}
           >
             Search
           </button>
@@ -66,12 +77,13 @@ const Body = () => {
           >
             Top Rated Restaurant
           </button>
-          </div>
-          <div className=" p-4 flex items-center " >
-          <label >UserName: </label>
-          <input className="border border-black p-2"
-          value={loggedInuser}
-          onChange={(e)=>setUserName(e.target.value)}
+        </div>
+        <div className=" p-4 flex items-center ">
+          <label>UserName: </label>
+          <input
+            className="border border-black p-2"
+            value={loggedInuser}
+            onChange={(e) => setUserName(e.target.value)}
           />
         </div>
       </div>

@@ -81,3 +81,8 @@ two types of routing are there
 * cart (cartslice)
 * dispatch(action)
 * Selector
+
+# type of testing
+* unit testing
+* integration testing
+* End to End testing- e2e testing
