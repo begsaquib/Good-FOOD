@@ -11,8 +11,7 @@ const Itemlist = ({ items, isShowAddButton,isShowRemoveButton }) => {
     dispatch(removeItem(item));
   }
 
-  console.log("hekii");
-
+ 
   return (
     <div>
       {items.map((item) => (
